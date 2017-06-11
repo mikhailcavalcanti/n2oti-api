@@ -1,3 +1,4 @@
 <?php
 
-exit('<pre>' . print_r('lol', true));
+$app = require './bootstrap.php';
+$app->run();
