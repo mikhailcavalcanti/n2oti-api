@@ -1,0 +1,27 @@
+{
+    "name": "n2oti/api",
+    "description": "projeto rest de teste para me candidatar a vaga na n2oti",
+    "type": "project",
+    "require": {
+        "silex/silex": "^2.1",
+        "doctrine/orm": "^2.5",
+        "doctrine/dbal": "^2.5",
+        "symfony/security": "^3.3",
+        "dflydev/doctrine-orm-service-provider": "^2.0",
+        "jdesrosiers/silex-jms-serializer-provider": "^1.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.2"
+    },
+    "authors": [
+        {
+            "name": "Mikhail Cavalcanti",
+            "email": "mikhailcavalcanti@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "N2oti\\": "src/N2oti"
+        }
+    }
+}
