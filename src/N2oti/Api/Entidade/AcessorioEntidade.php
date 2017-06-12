@@ -7,11 +7,11 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Description of Carro
  *
- * @author User
+ * @author Mikhail Cavalcanti <mikhailcavalcanti@gmail.com
  * @ORM\Entity
  * @ORM\Table(name="n2oti.acessorio")
  */
-class AcessorioEntidade
+class AcessorioEntidade extends AbstractEntidade
 {
 
     /**
@@ -61,17 +61,6 @@ class AcessorioEntidade
     {
         $this->nome = $nome;
         $this->tipo = $tipo;
-    }
-
-    /**
-     * Aletrar os atributos privados desta entidade
-     * @param array $atributos
-     */
-    public function alterar(array $atributos)
-    {
-        foreach ($this as $nomeDoAtributo => $valorDoAtributo) {
-            $this->$nomeDoAtributo = isset($atributos[$nomeDoAtributo]) ? $atributos[$nomeDoAtributo] : $valorDoAtributo;
-        }
     }
 
     /**
