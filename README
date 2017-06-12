@@ -1,3 +1,4 @@
+--------------------------- COMO CONSUMIR A API ---------------------------
 Ao fazer a requisição e enviar as informações que não sejam pela url (querystring) pelos métodos GET POST PUT
 lembar de por esta informação no cabeçalho do request
 Content-Type: application/x-www-form-urlencoded
@@ -7,6 +8,8 @@ GET    200  OK
 DELETE 204  NO CONTENT
 PUT    204  NO CONTENT
 POST   201  CREATED
+
+--------------------------- ROTAS DA API ---------------------------
 
 Acessório
     * Olhar os valores de tipos possíveis nas constantes da classe N2oti\Api\Entidade\AcessorioEntidade
@@ -29,3 +32,13 @@ Modelo
         atributos {nome: "string", ano:"inteiro", aro: inteiro}
     PUT   http://url-do-projeto/modelo/{indice}
         atributos {nome: "string", ano:"inteiro", aro: inteiro}
+
+--------------------------- BANCO DE DADOS ---------------------------
+
+Criar o banco - Se executar sem o parâmetro --dump-sql o doctrine executa o script no banco
+    cd raiz-do-projeto
+    ./vendor/bin/doctrine orm:schema-tool:create --dump-sql
+
+Atualizar o banco - Se executar com o parâmetro --force o doctrine executa o script no banco
+    cd raiz-do-projeto
+    ./vendor/bin/doctrine orm:schema-tool:update --dump-sql
