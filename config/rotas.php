@@ -15,52 +15,22 @@ $app->register(new ServiceControllerServiceProvider());
 /* @var $app Application */
 
 # acessorio
-$app->get('/acessorio/{indice}', function (Application $app, $indice) {
-    return $app['acessorio.controller']->encontrarAction($indice);
-});
-$app->get('/acessorio', function (Application $app, Request $request) {
-    return $app['acessorio.controller']->encontrarTodosAction($request);
-});
-$app->post('/acessorio', function (Application $app, Request $request) {
-    return $app['acessorio.controller']->criarAction($request);
-});
-$app->put('/acessorio/{indice}', function (Application $app, Request $request, $indice) {
-    return $app['acessorio.controller']->atualizarAction($indice, $request);
-});
-$app->delete('/acessorio/{indice}', function (Application $app, $indice) {
-    return $app['acessorio.controller']->deletarAction($indice);
-});
+$app->get('/acessorio/{indice}', 'acessorio.controller:encontrarAction');
+$app->get('/acessorio', 'acessorio.controller:encontrarTodosAction');
+$app->post('/acessorio', 'acessorio.controller:criarAction');
+$app->put('/acessorio/{indice}', 'acessorio.controller:atualizarAction');
+$app->delete('/acessorio/{indice}', 'acessorio.controller:deletarAction');
 
 # modelo
-$app->get('/modelo/{indice}', function (Application $app, $indice) {
-    return $app['modelo.controller']->encontrarAction($indice);
-});
-$app->get('/modelo', function (Application $app, Request $request) {
-    return $app['modelo.controller']->encontrarTodosAction($request);
-});
-$app->post('/modelo', function (Application $app, Request $request) {
-    return $app['modelo.controller']->criarAction($request);
-});
-$app->put('/modelo/{indice}', function (Application $app, Request $request, $indice) {
-    return $app['modelo.controller']->atualizarAction($indice, $request);
-});
-$app->delete('/modelo/{indice}', function (Application $app, $indice) {
-    return $app['modelo.controller']->deletarAction($indice);
-});
+$app->get('/modelo/{indice}', 'modelo.controller:encontrarAction');
+$app->get('/modelo', 'modelo.controller:encontrarTodosAction');
+$app->post('/modelo', 'modelo.controller:criarAction');
+$app->put('/modelo/{indice}', 'modelo.controller:atualizarAction');
+$app->delete('/modelo/{indice}', 'modelo.controller:deletarAction');
 
 # usuário
-$app->get('/usuario/{indice}', function (Application $app, $indice) {
-    return $app['usuario.controller']->encontrarAction($indice);
-});
-$app->get('/usuario', function (Application $app, Request $request) {
-    return $app['usuario.controller']->encontrarTodosAction($request);
-});
-$app->post('/usuario', function (Application $app, Request $request) {
-    return $app['usuario.controller']->criarAction($request);
-});
-$app->put('/usuario/{indice}', function (Application $app, Request $request, $indice) {
-    return $app['usuario.controller']->atualizarAction($indice, $request);
-});
-$app->delete('/usuario/{indice}', function (Application $app, $indice) {
-    return $app['usuario.controller']->deletarAction($indice);
-});
+$app->get('/usuario/{indice}', 'usuario.controller:encontrarAction');
+$app->get('/usuario', 'usuario.controller:encontrarTodosAction');
+$app->post('/usuario', 'usuario.controller:criarAction');
+$app->put('/usuario/{indice}', 'usuario.controller:atualizarAction');
+$app->delete('/usuario/{indice}', 'usuario.controller:deletarAction');
