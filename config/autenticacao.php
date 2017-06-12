@@ -10,7 +10,9 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 $app->before(function(Request $request, Application $app) {
     # escapando rotas publicas
-    $cadastroUsuario = 'POST_usuario' == $request->attributes->get('_route');
+    $rota = $request->attributes->get('_route');
+    $isRotaCadastroUsuario = 'POST_usuario' == $rota;
+    $isRotaAutenticar = 'POST_autenticar' == $rota;
     if ($cadastroUsuario) {
         return;
     }
@@ -24,7 +26,7 @@ $app->before(function(Request $request, Application $app) {
             $token = new PreAuthenticatedToken('user', $token, 'jwt');
         }
         # autenticacao usuario e senha
-        if (null === $token && $login && $senha) {
+        if (null === $token && $isRotaAutenticar && $login && $senha) {
             $token = new UsernamePasswordToken($login, $senha, 'usuario');
         }
         $tokenStorage = $app['security.token_storage'];
