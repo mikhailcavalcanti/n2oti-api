@@ -1,14 +1,7 @@
 <?php
 
-use N2oti\Api\Controller\AcessorioController;
-use N2oti\Api\Controller\ModeloController;
-use N2oti\Api\Controller\UsuarioController;
-use N2oti\Api\Servico\AcessorioServico;
-use N2oti\Api\Servico\ModeloServico;
-use N2oti\Api\Servico\UsuarioServico;
 use Silex\Application;
 use Silex\Provider\ServiceControllerServiceProvider;
-use Symfony\Component\HttpFoundation\Request;
 
 $app->register(new ServiceControllerServiceProvider());
 
@@ -34,3 +27,8 @@ $app->get('/usuario', 'usuario.controller:encontrarTodosAction');
 $app->post('/usuario', 'usuario.controller:criarAction');
 $app->put('/usuario/{indice}', 'usuario.controller:atualizarAction');
 $app->delete('/usuario/{indice}', 'usuario.controller:deletarAction');
+
+# login
+$app->post('autenticar', function(Application $app) {
+    return $app['autenticar.controller']->autenticar($app['security.token_storage']->getToken(), $app['jwt.key']);
+});

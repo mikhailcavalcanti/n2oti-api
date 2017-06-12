@@ -3,6 +3,8 @@
 namespace N2oti\Api\Entidade;
 
 use Doctrine\ORM\Mapping as ORM;
+use N2oti\Api\Servico\UsuarioServico;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Description of UsuarioEntidade
@@ -10,8 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  * @author Mikhail Cavalcanti <mikhailcavalcanti@gmail.com
  * @ORM\Entity
  * @ORM\Table(name="n2oti.usuario")
+ * @ORM\ChangeTrackingPolicy("DEFERRED_EXPLICIT")
  */
-class UsuarioEntidade implements CrudableEntidade
+class UsuarioEntidade implements CrudableEntidade, UserInterface
 {
 
     /**
@@ -25,7 +28,7 @@ class UsuarioEntidade implements CrudableEntidade
     private $indice;
 
     /**
-     * @ORM\Column(type="string", name="login", length=100,
+     * @ORM\Column(type="string", name="login", length=100, unique=true,
      * options={
      *    "comment":"O login de acesso do usuário"
      * })
@@ -49,7 +52,7 @@ class UsuarioEntidade implements CrudableEntidade
     public function __construct($login, $senha)
     {
         $this->login = $login;
-        $this->senha = $this->criptografaSenha($senha);
+        $this->senha = UsuarioServico::criptografaSenha($login, $senha);
     }
 
     /**
@@ -62,19 +65,9 @@ class UsuarioEntidade implements CrudableEntidade
             $this->$nomeDoAtributo = isset($atributos[$nomeDoAtributo]) ? $atributos[$nomeDoAtributo] : $valorDoAtributo;
         }
         if (isset($atributos['senha'])) {
-            $this->senha = $this->criptografaSenha($atributos['senha']);
+            $login = isset($atributos['login']) ? $atributos['login'] : $this->login;
+            $this->senha = UsuarioServico::criptografaSenha($login, $atributos['senha']);
         }
-    }
-
-    /**
-     * 
-     * @param string $senha
-     * @return string
-     */
-    private function criptografaSenha($senha)
-    {
-        $salt = uniqid();
-        return hash('sha512', $senha . $salt);
     }
 
     /**
@@ -102,6 +95,38 @@ class UsuarioEntidade implements CrudableEntidade
     public function getSenha()
     {
         return $this->senha;
+    }
+
+    /**
+     * @see UserInterface::eraseCredentials()
+     */
+    public function eraseCredentials()
+    {
+        unset($this->senha);
+    }
+
+    public function getPassword()
+    {
+        
+    }
+
+    public function getRoles()
+    {
+        
+    }
+
+    public function getSalt()
+    {
+        
+    }
+
+    /**
+     * @see UserInterface::getUsername()
+     * @return string
+     */
+    public function getUsername()
+    {
+        return $this->login;
     }
 
 }

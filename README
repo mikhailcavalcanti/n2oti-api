@@ -3,9 +3,18 @@ cd raiz-do-projeto
 composer install
 
 --------------------------- COMO CONSUMIR A API ---------------------------
+
+ATENÇÃO - Todas as requisições (urls) com exceção do POST para /usuario necessitam de enviar o token de autorização
+no cabeçalho da requisição, Exemplo:
+Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJsb2NhbGhvc3Q6ODA4MiIsImF1ZCI6ImxvY2FsaG9zdDo4MDgyXC9zaWdvcmdcL3dlYiIsImlhdCI6MTQ5NzI4ODAxMCwibmJmIjoxNDk3Mjg4MDEwLCJ1aWQiOjMsInV0eXBlIjoiUk9MRV9VU1VBUklPIn0.s3bwPjT28_K-37ChpPM0p2lucljHa9tgofxLKFkTJPQ
+
+Você pode fazer uma requisição POST para /usuario com os atributos login e senha para cadastrar um usuário novo
+e em seguida uma requisição POST para /autenticar com este login e senha cadastrados e a API retornará
+o próprio usuário como corpo da resposta e o Header Authorization para usar nas requisições seguintes
+
 Ao fazer a requisição e enviar as informações que não sejam pela url (querystring) pelos métodos GET POST PUT
 lembar de por esta informação no cabeçalho do request
-Content-Type: application/x-www-form-urlencoded
+     º Content-Type: application/x-www-form-urlencoded
 
 O status do response esperado para cada método
 GET    200  OK
@@ -17,7 +26,7 @@ POST   201  CREATED
 
 Usuário
     GET    http://url-do-projeto/usuario/{indice}
-    GET    http://url-do-projeto/usuario?login=mkikhail
+    GET    http://url-do-projeto/usuario?login=mikhail
     DELETE http://url-do-projeto/usuario/{indice}
     POST   http://url-do-projeto/usuario
         atributos {login: "string", senha:"string"}
