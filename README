@@ -1,6 +1,7 @@
 --------------------------- COMO MONTAR O PROJETO DA API ---------------------------
 cd raiz-do-projeto
 composer install
+o arquivo com as informações do banco está em ./config/config.php
 
 --------------------------- COMO CONSUMIR A API ---------------------------
 
