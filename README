@@ -1,0 +1,20 @@
+Ao fazer a requisição e enviar as informações que não sejam pela url (querystring) pelos métodos GET POST PUT
+lembar de por esta informação no cabeçalho do request
+Content-Type: application/x-www-form-urlencoded
+
+O status do response esperado para cada método
+GET    200  OK
+DELETE 204  NO CONTENT
+PUT    204  NO CONTENT
+POST   201  CREATED
+
+Acessório
+    * Olhar os valores de tipos possíveis nas constantes da classe N2oti\Api\Entidade\AcessorioEntidade
+    GET    http://url-do-projeto/acessorio/{indice}
+    GET    http://url-do-projeto/acessorio?tipo=1
+    GET    http://url-do-projeto/acessorio?tipo=farol%20alteza
+    DELETE http://url-do-projeto/acessorio/{indice}
+    POST   http://url-do-projeto/acessorio
+        atributos {nome: "string", tipo:"inteiro"}
+    PUT   http://url-do-projeto/acessorio/{indice}
+        atributos {nome: "string", tipo:"inteiro"}
