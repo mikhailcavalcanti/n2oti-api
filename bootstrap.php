@@ -1,12 +1,16 @@
 <?php
 
 use Silex\Application;
-use Silex\Provider\ServiceControllerServiceProvider;
+use Silex\Provider\SerializerServiceProvider;
 
 require __DIR__ . '/vendor/autoload.php';
 
 $app = new Application();
 $app['debug'] = true;
+
 $app['config'] = include __DIR__ . '/config/config.php';
+require __DIR__ . '/config/rotas.php';
+require __DIR__ . '/config/banco.php';
+$app->register(new SerializerServiceProvider());
 
 return $app;

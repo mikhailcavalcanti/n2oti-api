@@ -44,7 +44,7 @@ class AcessorioEntidade
     private $nome;
 
     /**
-     * @ORM\Column(type="smallint", name="ano_modelo", options={
+     * @ORM\Column(type="smallint", name="tipo_acessorio", options={
      *    "comment":"o tipo do acessorio do carro. 1 - acessorio de fabrica e 2 para acessorio opcional"
      * }))
      * @var integer
@@ -61,6 +61,44 @@ class AcessorioEntidade
     {
         $this->nome = $nome;
         $this->tipo = $tipo;
+    }
+
+    /**
+     * Aletrar os atributos privados desta entidade
+     * @param array $atributos
+     */
+    public function alterar(array $atributos)
+    {
+        foreach ($this as $nomeDoAtributo => $valorDoAtributo) {
+            $this->$nomeDoAtributo = isset($atributos[$nomeDoAtributo]) ? $atributos[$nomeDoAtributo] : $valorDoAtributo;
+        }
+    }
+
+    /**
+     * 
+     * @return integer
+     */
+    public function getIndice()
+    {
+        return $this->indice;
+    }
+
+    /**
+     * 
+     * @return string
+     */
+    public function getNome()
+    {
+        return $this->nome;
+    }
+
+    /**
+     * 
+     * @return integer
+     */
+    public function getTipo()
+    {
+        return $this->tipo;
     }
 
 }
