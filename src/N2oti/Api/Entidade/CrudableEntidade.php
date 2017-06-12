@@ -10,7 +10,7 @@ interface CrudableEntidade
 {
 
     /**
-     * Aletrar os atributos privados desta entidade
+     * Alterar os atributos privados desta entidade
      * @param array $atributos
      */
     public function alterar(array $atributos);

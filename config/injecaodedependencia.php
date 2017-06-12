@@ -40,7 +40,7 @@ $app['autenticar.servico'] = function(Application $app) {
     return new AutenticarServico( $app['usuario.servico']);
 };
 $app['modelo.servico'] = function(Application $app) {
-    return new ModeloServico($app['orm.em']);
+    return new ModeloServico($app['orm.em'], $app['acessorio.servico']);
 };
 $app['usuario.servico'] = function(Application $app) {
     return new UsuarioServico($app['orm.em']);

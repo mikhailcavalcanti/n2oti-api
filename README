@@ -51,9 +51,13 @@ Modelo
     GET    http://url-do-projeto/modelo?nome=Civic&ano=2017
     DELETE http://url-do-projeto/modelo/{indice}
     POST   http://url-do-projeto/modelo
-        atributos {nome: "string", ano:"inteiro", aro: inteiro}
+        atributos {nome: "string", ano:"inteiro", aro: inteiro, acessorios: array([0] => array('id' => 1)}
+        exemplo com acessórios
+            nome=New Civic&aro=22&ano=2017&acessorios[][id]=1&acessorios[][id]=2
     PUT   http://url-do-projeto/modelo/{indice}
-        atributos {nome: "string", ano:"inteiro", aro: inteiro}
+        atributos {nome: "string", ano:"inteiro", aro: inteiro, acessorios: array([0] => array('id' => 1)}
+        exemplo com acessórios
+            nome=New Civic&aro=22&ano=2017&acessorios[][id]=1&acessorios[][id]=2
 
 --------------------------- BANCO DE DADOS ---------------------------
 

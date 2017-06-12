@@ -60,6 +60,7 @@ abstract class ServicoAbstrato implements CrudableServico
      */
     public function criar(array $dados)
     {
+        $this->validarDadosParaCriarRecurso($dados);
         $entidade = $this->criarInstanciaDaEntidade($dados);
         $this->entityManager->persist($entidade);
         $this->entityManager->flush();
@@ -96,6 +97,12 @@ abstract class ServicoAbstrato implements CrudableServico
     {
         return $this->entityManager->getRepository($this->nomeDaEntidade)->findBy($dados);
     }
+
+    /**
+     * Valida os dados antes de criar um recurso no banco de dados
+     * @param array $atributos
+     */
+    public abstract function validarDadosParaCriarRecurso(array $dados);
 
     /**
      * Retorna uma intancia da entidade a partir dos dados passados por parâmetro
