@@ -104,13 +104,19 @@ abstract class ServicoAbstrato implements CrudableServico
      * Valida os dados antes de criar um recurso no banco de dados
      * @param array $dados
      */
-    public abstract function validarDadosParaCriarRecurso(array $dados);
+    public function validarDadosParaCriarRecurso(array $dados)
+    {
+        
+    }
 
     /**
      * Valida os dados antes de alterar um recurso no banco de dados
      * @param array $dados
      */
-    public abstract function validarDadosParaAlterarRecurso(array $dados);
+    public function validarDadosParaAlterarRecurso(array $dados)
+    {
+        
+    }
 
     /**
      * Retorna uma intancia da entidade a partir dos dados passados por parâmetro
@@ -120,6 +126,9 @@ abstract class ServicoAbstrato implements CrudableServico
     /**
      * Manipula os dados antes de injetar os mesmos na entidade para alterar no banco
      */
-    public abstract function manipulaDadosAntesDeAlterar(array &$dados);
+    public function manipulaDadosAntesDeAlterar(array &$dados)
+    {
+        
+    }
 
 }

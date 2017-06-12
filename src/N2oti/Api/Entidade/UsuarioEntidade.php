@@ -37,7 +37,7 @@ class UsuarioEntidade implements CrudableEntidade, UserInterface
     private $login;
 
     /**
-     * @ORM\Column(type="string", name="senha", options={
+     * @ORM\Column(type="string", name="senha",length=128, options={
      *    "comment":"A senha de acesso do usuário"
      * }))
      * @var integer
