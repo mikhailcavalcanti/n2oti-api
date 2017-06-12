@@ -11,9 +11,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Serializer;
 
 /**
- * Description of TesteController
+ * Description of AcessorioController
  *
- * @author User
+ * @author Mikhail Cavalcanti <mikhailcavalcanti@gmail.com
  */
 class AcessorioController implements CrudableController
 {
