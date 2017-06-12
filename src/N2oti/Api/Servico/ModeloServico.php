@@ -3,14 +3,14 @@
 namespace N2oti\Api\Servico;
 
 use Doctrine\ORM\EntityManager;
-use N2oti\Api\Entidade\AcessorioEntidade;
+use N2oti\Api\Entidade\ModeloEntidade;
 
 /**
- * Description of AcessorioServico
+ * Description of ModeloServico
  *
  * @author Mikhail Cavalcanti <mikhailcavalcanti@gmail.com>
  */
-class AcessorioServico implements CrudableServico
+class ModeloServico implements CrudableServico
 {
 
     /**
@@ -34,12 +34,12 @@ class AcessorioServico implements CrudableServico
      */
     public function atualizar($indice, array $dados)
     {
-        $acessorio = $this->encontrar($indice);
-        if (!$acessorio) {
-            throw new \DomainException("Não existe acessório com este identificador : {$indice}");
+        $modelo = $this->entityManager->find(ModeloEntidade::class, $indice);
+        if (!$modelo) {
+            throw new \DomainException("Não existe modelo com este identificador : {$indice}");
         }
-        $acessorio->alterar($dados);
-        $this->entityManager->persist($acessorio);
+        $modelo->alterar($dados);
+        $this->entityManager->persist($modelo);
         $this->entityManager->flush();
     }
 
@@ -49,10 +49,14 @@ class AcessorioServico implements CrudableServico
      */
     public function criar(array $dados)
     {
-        $acessorio = new AcessorioEntidade($dados['nome'], $dados['tipo']);
-        $this->entityManager->persist($acessorio);
+        $modelo = new ModeloEntidade(
+                $dados['nome'],
+                $dados['ano'],
+                $dados['aro']
+                );
+        $this->entityManager->persist($modelo);
         $this->entityManager->flush();
-        return $acessorio;
+        return $modelo;
     }
 
     /**
@@ -61,9 +65,9 @@ class AcessorioServico implements CrudableServico
      */
     public function deletar($indice)
     {
-        $acessorio = $this->encontrar($indice);
-        if ($acessorio) {
-            $this->entityManager->remove($acessorio);
+        $motivo = $this->encontrar($indice);
+        if ($motivo) {
+            $this->entityManager->remove($motivo);
             $this->entityManager->flush();
         }
     }
@@ -74,7 +78,7 @@ class AcessorioServico implements CrudableServico
      */
     public function encontrar($indice)
     {
-        return $this->entityManager->find(AcessorioEntidade::class, $indice);
+        return $this->entityManager->find(ModeloEntidade::class, $indice);
     }
 
     /**
@@ -83,7 +87,7 @@ class AcessorioServico implements CrudableServico
      */
     public function encontrarTodos(array $dados)
     {
-        return $this->entityManager->getRepository(AcessorioEntidade::class)->findBy($dados);
+        return $this->entityManager->getRepository(ModeloEntidade::class)->findBy($dados);
     }
 
 }

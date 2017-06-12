@@ -4,8 +4,8 @@ namespace N2oti\Api\Controller;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMInvalidArgumentException;
-use DomainException;
 use N2oti\Api\Entidade\ModeloEntidade;
+use N2oti\Api\Servico\ModeloServico;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,24 +21,24 @@ class ModeloController implements CrudableController
 
     /**
      *
-     * @var EntityManager
-     */
-    private $entityManager;
-
-    /**
-     *
      * @var Serializer
      */
     private $serializer;
 
     /**
+     *
+     * @var ModeloServico
+     */
+    private $modeloServico;
+
+    /**
      * 
      * @param EntityManager $entityManager
      */
-    public function __construct(EntityManager $entityManager, Serializer $serializar)
+    public function __construct(Serializer $serializar, ModeloServico $modeloService)
     {
-        $this->entityManager = $entityManager;
         $this->serializer = $serializar;
+        $this->modeloServico = $modeloService;
     }
 
     /**
@@ -47,13 +47,7 @@ class ModeloController implements CrudableController
      */
     public function atualizarAction($indice, Request $request)
     {
-        $data = $this->entityManager->find(ModeloEntidade::class, $indice);
-        if (!$data) {
-            throw new \DomainException("Não existe acessório com este identificador : {$indice}");
-        }
-        $data->alterar($request->request->all());
-        $this->entityManager->persist($data);
-        $this->entityManager->flush();
+        $this->modeloServico->atualizar($indice, $request->request->all());
         return new JsonResponse(null, Response::HTTP_NO_CONTENT);
     }
 
@@ -63,13 +57,7 @@ class ModeloController implements CrudableController
      */
     public function criarAction(Request $request)
     {
-        $data = new ModeloEntidade(
-                $request->request->get('nome'),
-                $request->request->get('ano'),
-                $request->request->get('aro')
-                );
-        $this->entityManager->persist($data);
-        $this->entityManager->flush();
+        $data = $this->modeloServico->criar($request->request->all());
         return new JsonResponse(json_decode($this->serializer->serialize($data, 'json')), Response::HTTP_CREATED);
     }
 
@@ -79,14 +67,8 @@ class ModeloController implements CrudableController
      */
     public function deletarAction($indice)
     {
-        try {
-            $this->entityManager->remove($this->entityManager->find(ModeloEntidade::class, $indice));
-            $this->entityManager->flush();
-        } catch (ORMInvalidArgumentException $exception) {
-            // Vai lançar essa exception se não encontrar o recurso no banco para deletar, por fim caindo no finally
-        } finally {
-            return new JsonResponse(null, Response::HTTP_NO_CONTENT);
-        }
+        $this->modeloServico->deletar($indice);
+        return new JsonResponse(null, Response::HTTP_NO_CONTENT);
     }
 
     /**
@@ -95,7 +77,7 @@ class ModeloController implements CrudableController
      */
     public function encontrarAction($indice)
     {
-        $data = $this->entityManager->find(ModeloEntidade::class, $indice);
+        $data = $this->modeloServico->encontrar($indice);
         return new JsonResponse(json_decode($this->serializer->serialize($data, 'json')));
     }
 
@@ -105,7 +87,7 @@ class ModeloController implements CrudableController
      */
     public function encontrarTodosAction(Request $request)
     {
-        $data = $this->entityManager->getRepository(ModeloEntidade::class)->findBy($request->query->all());
+        $data = $this->modeloServico->encontrarTodos($request->query->all());
         return new JsonResponse(json_decode($this->serializer->serialize($data, 'json')));
     }
 

@@ -2,6 +2,8 @@
 
 use N2oti\Api\Controller\AcessorioController;
 use N2oti\Api\Controller\ModeloController;
+use N2oti\Api\Servico\AcessorioServico;
+use N2oti\Api\Servico\ModeloServico;
 use Silex\Application;
 use Silex\Provider\ServiceControllerServiceProvider;
 use Symfony\Component\HttpFoundation\Request;
@@ -48,9 +50,12 @@ $app['acessorio.controller'] = function(Application $app) {
     return new AcessorioController($app['serializer'], $app['acessorio.servico']);
 };
 $app['acessorio.servico'] = function(Application $app) {
-    return new N2oti\Api\Servico\AcessorioServico($app['orm.em']);
+    return new AcessorioServico($app['orm.em']);
 };
 
 $app['modelo.controller'] = function(Application $app) {
-    return new ModeloController($app['orm.em'], $app['serializer']);
+    return new ModeloController($app['serializer'], $app['modelo.servico']);
+};
+$app['modelo.servico'] = function(Application $app) {
+    return new ModeloServico($app['orm.em']);
 };

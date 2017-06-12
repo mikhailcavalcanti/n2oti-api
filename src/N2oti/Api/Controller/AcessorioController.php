@@ -68,14 +68,8 @@ class AcessorioController implements CrudableController
      */
     public function deletarAction($indice)
     {
-        try {
-            $this->entityManager->remove($this->entityManager->find(AcessorioEntidade::class, $indice));
-            $this->entityManager->flush();
-        } catch (ORMInvalidArgumentException $exception) {
-            // Vai lançar essa exception se não encontrar o recurso no banco para deletar, por fim caindo no finally
-        } finally {
-            return new JsonResponse(null, Response::HTTP_NO_CONTENT);
-        }
+        $this->acessorioServico->deletar($indice);
+        return new JsonResponse(null, Response::HTTP_NO_CONTENT);
     }
 
     /**
