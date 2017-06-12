@@ -42,12 +42,14 @@ abstract class ServicoAbstrato implements CrudableServico
      */
     public function atualizar($indice, array $dados)
     {
+        $this->validarDadosParaAlterarRecurso($dados);
         $entidade = $this->encontrar($indice);
         if (!$entidade) {
             throw new DomainException("Não existe recurso com este identificador : {$indice}");
         } else if (!$entidade instanceof CrudableEntidade) {
             throw new DomainException(printf('A entidade %s precisa implementar a interface %s', get_class($entidade), CrudableEntidade::class));
         }
+        $this->manipulaDadosAntesDeAlterar($dados);
         // este método está garantido de existir porque implementa CrudableEntidade
         $entidade->alterar($dados);
         $this->entityManager->persist($entidade);
@@ -100,12 +102,24 @@ abstract class ServicoAbstrato implements CrudableServico
 
     /**
      * Valida os dados antes de criar um recurso no banco de dados
-     * @param array $atributos
+     * @param array $dados
      */
     public abstract function validarDadosParaCriarRecurso(array $dados);
+
+    /**
+     * Valida os dados antes de alterar um recurso no banco de dados
+     * @param array $dados
+     */
+    public abstract function validarDadosParaAlterarRecurso(array $dados);
 
     /**
      * Retorna uma intancia da entidade a partir dos dados passados por parâmetro
      */
     public abstract function criarInstanciaDaEntidade(array $dados);
+
+    /**
+     * Manipula os dados antes de injetar os mesmos na entidade para alterar no banco
+     */
+    public abstract function manipulaDadosAntesDeAlterar(array &$dados);
+
 }

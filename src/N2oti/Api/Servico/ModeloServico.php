@@ -33,17 +33,39 @@ class ModeloServico extends ServicoAbstrato
      */
     public function criarInstanciaDaEntidade(array $dados)
     {
+        return new ModeloEntidade(
+                $dados['nome'],
+                $dados['ano'],
+                $dados['aro'],
+                $this->retornaAcessoriosParaAcossiacaoComModelo($dados)
+        );
+    }
+
+    /**
+     * 
+     * {@inheritDoc}
+     */
+    public function manipulaDadosAntesDeAlterar(array &$dados)
+    {
+        $dados['acessorios'] = $this->retornaAcessoriosParaAcossiacaoComModelo($dados);
+    }
+
+    /**
+     * Pega os ids dos acessorios passados no parâmetro $dados e retorna um ArrayCollection
+     * com os acessorios encontradoe no banco
+     * @param array $dados
+     * @return ArrayCollection
+     */
+    private function retornaAcessoriosParaAcossiacaoComModelo(array $dados)
+    {
         $acessoriosColecao = new ArrayCollection();
         $acessorios = isset($dados['acessorios']) ? $dados['acessorios'] : null;
         if ($acessorios) {
             foreach ($acessorios as $acessorio) {
-                $acessorioEntidade = $this->acessorioServico->encontrar($acessorio['id']);
-                if ($acessorioEntidade) {
-                    $acessoriosColecao->add($acessorioEntidade);
-                }
+                $acessoriosColecao->add($this->acessorioServico->encontrar($acessorio['id']));
             }
         }
-        return new ModeloEntidade($dados['nome'], $dados['ano'], $dados['aro'], $acessoriosColecao);
+        return $acessoriosColecao;
     }
 
     /**
@@ -64,6 +86,15 @@ class ModeloServico extends ServicoAbstrato
         if (!empty($errors)) {
             throw new DomainException(implode('|', $errors));
         }
+    }
+
+    /**
+     * 
+     * {@inheritDoc}
+     */
+    public function validarDadosParaAlterarRecurso(array $dados)
+    {
+        $this->validarDadosParaCriarRecurso($dados);
     }
 
     /**
