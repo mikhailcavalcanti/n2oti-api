@@ -64,24 +64,3 @@ $app->put('/usuario/{indice}', function (Application $app, Request $request, $in
 $app->delete('/usuario/{indice}', function (Application $app, $indice) {
     return $app['usuario.controller']->deletarAction($indice);
 });
-
-$app['acessorio.controller'] = function(Application $app) {
-    return new AcessorioController($app['serializer'], $app['acessorio.servico']);
-};
-$app['acessorio.servico'] = function(Application $app) {
-    return new AcessorioServico($app['orm.em']);
-};
-
-$app['modelo.controller'] = function(Application $app) {
-    return new ModeloController($app['serializer'], $app['modelo.servico']);
-};
-$app['modelo.servico'] = function(Application $app) {
-    return new ModeloServico($app['orm.em']);
-};
-
-$app['usuario.controller'] = function(Application $app) {
-    return new UsuarioController($app['serializer'], $app['usuario.servico']);
-};
-$app['usuario.servico'] = function(Application $app) {
-    return new UsuarioServico($app['orm.em']);
-};
