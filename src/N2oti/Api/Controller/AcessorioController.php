@@ -3,10 +3,8 @@
 namespace N2oti\Api\Controller;
 
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\ORMInvalidArgumentException;
-use DomainException;
-use N2oti\Api\Entidade\AcessorioEntidade;
 use N2oti\Api\Servico\AcessorioServico;
+use N2oti\Api\Servico\CrudableServico;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,7 +34,7 @@ class AcessorioController implements CrudableController
      * 
      * @param EntityManager $entityManager
      */
-    public function __construct(Serializer $serializar, AcessorioServico $acessorioServico)
+    public function __construct(Serializer $serializar, CrudableServico $acessorioServico)
     {
         $this->serializer = $serializar;
         $this->acessorioServico = $acessorioServico;

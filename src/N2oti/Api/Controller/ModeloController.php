@@ -3,8 +3,7 @@
 namespace N2oti\Api\Controller;
 
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\ORMInvalidArgumentException;
-use N2oti\Api\Entidade\ModeloEntidade;
+use N2oti\Api\Servico\CrudableServico;
 use N2oti\Api\Servico\ModeloServico;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,7 +34,7 @@ class ModeloController implements CrudableController
      * 
      * @param EntityManager $entityManager
      */
-    public function __construct(Serializer $serializar, ModeloServico $modeloService)
+    public function __construct(Serializer $serializar, CrudableServico $modeloService)
     {
         $this->serializer = $serializar;
         $this->modeloServico = $modeloService;

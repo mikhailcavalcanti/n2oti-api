@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="n2oti.acessorio")
  */
-class AcessorioEntidade extends AbstractEntidade implements CrudableEntidade
+class AcessorioEntidade implements CrudableEntidade
 {
 
     /**

@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="n2oti.modelo")
  */
-class ModeloEntidade extends AbstractEntidade implements CrudableEntidade
+class ModeloEntidade implements CrudableEntidade
 {
 
     /**
