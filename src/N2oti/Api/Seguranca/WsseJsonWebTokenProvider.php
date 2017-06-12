@@ -2,13 +2,13 @@
 
 namespace N2oti\Api\Seguranca;
 
+use Exception;
 use Firebase\JWT\JWT;
 use N2oti\Api\Servico\AutenticarServico;
 use N2oti\Api\Servico\UsuarioServico;
 use Symfony\Component\Security\Core\Authentication\Provider\AuthenticationProviderInterface;
 use Symfony\Component\Security\Core\Authentication\Token\PreAuthenticatedToken;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use TheSeer\Tokenizer\Exception;
 
 /**
  * Description of WsseJsonWebTokenProvider
