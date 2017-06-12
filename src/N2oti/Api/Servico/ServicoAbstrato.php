@@ -3,6 +3,8 @@
 namespace N2oti\Api\Servico;
 
 use Doctrine\ORM\EntityManager;
+use DomainException;
+use N2oti\Api\Entidade\CrudableEntidade;
 
 /**
  * Description of ServicoAbstrato
@@ -42,8 +44,11 @@ abstract class ServicoAbstrato implements CrudableServico
     {
         $entidade = $this->encontrar($indice);
         if (!$entidade) {
-            throw new \DomainException("Não existe recurso com este identificador : {$indice}");
+            throw new DomainException("Não existe recurso com este identificador : {$indice}");
+        } else if (!$entidade instanceof CrudableEntidade) {
+            throw new DomainException(printf('A entidade %s precisa implementar a interface %s', get_class($entidade), CrudableEntidade::class));
         }
+        // este método está garantido de existir porque implementa CrudableEntidade
         $entidade->alterar($dados);
         $this->entityManager->persist($entidade);
         $this->entityManager->flush();

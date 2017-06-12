@@ -32,7 +32,8 @@ class ModeloController implements CrudableController
 
     /**
      * 
-     * @param EntityManager $entityManager
+     * @param Serializer $serializar
+     * @param CrudableServico $modeloService
      */
     public function __construct(Serializer $serializar, CrudableServico $modeloService)
     {

@@ -5,7 +5,7 @@ namespace N2oti\Api\Entidade;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Description of Carro
+ * Description of AcessorioEntidade
  *
  * @author Mikhail Cavalcanti <mikhailcavalcanti@gmail.com
  * @ORM\Entity
