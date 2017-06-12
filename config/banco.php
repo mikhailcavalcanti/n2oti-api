@@ -12,7 +12,7 @@ $addMapping('N2oti\Api\Entidade', __DIR__ . '/../src/N2oti/Api/Entidade');
 
 $app->register(new DoctrineServiceProvider(), array(
     'db.options' => array(
-        'driver' => 'pdo_pgsql',
+        'driver' => $app['config']['database']['driver'],
         'host' => $app['config']['database']['host'],
         'charset' => 'utf8',
         'dbname' => $app['config']['database']['dbname'],
