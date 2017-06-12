@@ -45,7 +45,10 @@ $app->delete('/modelo/{indice}', function (Application $app, $indice) {
 });
 
 $app['acessorio.controller'] = function(Application $app) {
-    return new AcessorioController($app['orm.em'], $app['serializer']);
+    return new AcessorioController($app['serializer'], $app['acessorio.servico']);
+};
+$app['acessorio.servico'] = function(Application $app) {
+    return new N2oti\Api\Servico\AcessorioServico($app['orm.em']);
 };
 
 $app['modelo.controller'] = function(Application $app) {
