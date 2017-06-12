@@ -1,3 +1,7 @@
+--------------------------- COMO MONTAR O PROJETO DA API ---------------------------
+cd raiz-do-projeto
+composer install
+
 --------------------------- COMO CONSUMIR A API ---------------------------
 Ao fazer a requisição e enviar as informações que não sejam pela url (querystring) pelos métodos GET POST PUT
 lembar de por esta informação no cabeçalho do request
