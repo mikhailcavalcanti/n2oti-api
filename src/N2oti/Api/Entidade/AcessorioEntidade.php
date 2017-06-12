@@ -29,7 +29,7 @@ class AcessorioEntidade implements CrudableEntidade
      * @ORM\Column(type="integer", name="id_acessorio", options={
      *    "comment":"chave única identificadora da tabela acessorio"
      * })
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\GeneratedValue(strategy="AUTO")
      * @var integer
      */
     private $indice;

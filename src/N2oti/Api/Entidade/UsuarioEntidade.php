@@ -22,7 +22,7 @@ class UsuarioEntidade implements CrudableEntidade, UserInterface
      * @ORM\Column(type="integer", name="id_usuario", options={
      *    "comment":"chave única identificadora da tabela usuário"
      * })
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\GeneratedValue(strategy="AUTO")
      * @var integer
      */
     private $indice;

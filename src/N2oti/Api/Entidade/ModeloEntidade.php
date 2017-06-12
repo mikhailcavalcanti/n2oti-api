@@ -20,7 +20,7 @@ class ModeloEntidade implements CrudableEntidade
      * @ORM\Column(type="integer", name="id_modelo", options={
      *    "comment":"chave única identificadora da tabela modelo"
      * })
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\GeneratedValue(strategy="AUTO")
      * @var integer
      */
     private $indice;
