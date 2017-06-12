@@ -15,6 +15,15 @@ POST   201  CREATED
 
 --------------------------- ROTAS DA API ---------------------------
 
+Usuário
+    GET    http://url-do-projeto/usuario/{indice}
+    GET    http://url-do-projeto/usuario?login=mkikhail
+    DELETE http://url-do-projeto/usuario/{indice}
+    POST   http://url-do-projeto/usuario
+        atributos {login: "string", senha:"string"}
+    PUT   http://url-do-projeto/usuario/{indice}
+        atributos {login: "string", senha:"string"}
+
 Acessório
     * Olhar os valores de tipos possíveis nas constantes da classe N2oti\Api\Entidade\AcessorioEntidade
     GET    http://url-do-projeto/acessorio/{indice}
