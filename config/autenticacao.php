@@ -30,7 +30,9 @@ $app->before(function(Request $request, Application $app) {
         $tokenStorage = $app['security.token_storage'];
         # Seta o token anonimo para usuario nao autenticado
         $tokenStorage->setToken(new AnonymousToken($app['jwt.key'], 'user'));
-        $tokenStorage->setToken($app['security.authentication_manager']->authenticate($token));
+        if ($token) {
+            $tokenStorage->setToken($app['security.authentication_manager']->authenticate($token));
+        }
     } catch (Exception $e) {
         return new JsonResponse(array('validate' => false, 'message' => $e->getMessage()), Response::HTTP_UNAUTHORIZED);
     }
