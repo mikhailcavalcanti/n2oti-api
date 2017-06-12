@@ -16,6 +16,7 @@ class AbstractEntidade implements CrudableEntidade
      */
     public function alterar(array $atributos)
     {
+            exit(dump('lol'));
         foreach ($this as $nomeDoAtributo => $valorDoAtributo) {
             $this->$nomeDoAtributo = isset($atributos[$nomeDoAtributo]) ? $atributos[$nomeDoAtributo] : $valorDoAtributo;
         }

@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  *
- * @author User
+ * @author Mikhail Cavalcanti <mikhailcavalcanti@gmail.com
  */
 interface CrudableController
 {

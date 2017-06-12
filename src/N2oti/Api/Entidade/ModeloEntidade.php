@@ -6,13 +6,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Description of Carro
+ * Description of Modelo
  *
- * @author User
+ * @author Mikhail Cavalcanti <mikhailcavalcanti@gmail.com
  * @ORM\Entity
  * @ORM\Table(name="n2oti.modelo")
  */
-class ModeloEntity
+class ModeloEntidade extends AbstractEntidade implements CrudableEntidade
 {
 
     /**
@@ -73,6 +73,62 @@ class ModeloEntity
         $this->ano = $ano;
         $this->aro = $aro;
         $this->acessorios = $acessorios ? $acessorios : new ArrayCollection();
+    }
+
+    /**
+     * 
+     * {@inheritDoc}
+     */
+    public function alterar(array $atributos)
+    {
+        foreach ($this as $nomeDoAtributo => $valorDoAtributo) {
+            $this->$nomeDoAtributo = isset($atributos[$nomeDoAtributo]) ? $atributos[$nomeDoAtributo] : $valorDoAtributo;
+        }
+    }
+
+    /**
+     * 
+     * @return integer
+     */
+    public function getIndice()
+    {
+        return $this->indice;
+    }
+
+    /**
+     * 
+     * @return string
+     */
+    public function getNome()
+    {
+        return $this->nome;
+    }
+
+    /**
+     * 
+     * @return integer
+     */
+    public function getAno()
+    {
+        return $this->ano;
+    }
+
+    /**
+     * 
+     * @return integer
+     */
+    public function getAro()
+    {
+        return $this->aro;
+    }
+
+    /**
+     * 
+     * @return ArrayCollection
+     */
+    public function getAcessorios()
+    {
+        return $this->acessorios;
     }
 
 }

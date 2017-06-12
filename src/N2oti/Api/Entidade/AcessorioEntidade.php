@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="n2oti.acessorio")
  */
-class AcessorioEntidade extends AbstractEntidade
+class AcessorioEntidade extends AbstractEntidade implements CrudableEntidade
 {
 
     /**
@@ -61,6 +61,17 @@ class AcessorioEntidade extends AbstractEntidade
     {
         $this->nome = $nome;
         $this->tipo = $tipo;
+    }
+
+    /**
+     * 
+     * {@inheritDoc}
+     */
+    public function alterar(array $atributos)
+    {
+        foreach ($this as $nomeDoAtributo => $valorDoAtributo) {
+            $this->$nomeDoAtributo = isset($atributos[$nomeDoAtributo]) ? $atributos[$nomeDoAtributo] : $valorDoAtributo;
+        }
     }
 
     /**

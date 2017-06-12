@@ -18,3 +18,14 @@ Acessório
         atributos {nome: "string", tipo:"inteiro"}
     PUT   http://url-do-projeto/acessorio/{indice}
         atributos {nome: "string", tipo:"inteiro"}
+
+Modelo
+    GET    http://url-do-projeto/modelo/{indice}
+    GET    http://url-do-projeto/modelo?aro=14
+    GET    http://url-do-projeto/modelo?nome=Civic
+    GET    http://url-do-projeto/modelo?nome=Civic&ano=2017
+    DELETE http://url-do-projeto/modelo/{indice}
+    POST   http://url-do-projeto/modelo
+        atributos {nome: "string", ano:"inteiro", aro: inteiro}
+    PUT   http://url-do-projeto/modelo/{indice}
+        atributos {nome: "string", ano:"inteiro", aro: inteiro}
